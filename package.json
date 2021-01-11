@@ -1,0 +1,45 @@
+{
+  "name": "noteful-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "migrate": "postgrator --config postgrator-config.js",
+    "migrate:production": "env SSL=true DATABASE_URL=$(heroku config:get DATABASE_URL) npm run migrate",
+    "predeploy": "npm audit && npm run migrate:production",
+    "deploy": "git push heroku master",
+    "postdeploy": "npm run migrate:production"
+  },
+  "keywords": [],
+  "engines": {
+    "node": "14.15.1"
+  },
+  "author": "Andrew Schmit andrewryanschmit@gmail.com ",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "helmet": "^4.3.1",
+    "knex": "^0.21.15",
+    "morgan": "^1.10.0",
+    "pg": "^7.18.2",
+    "postgrator": "^4.1.1",
+    "postgrator-cli": "3.2.0",
+    "winston": "^3.3.3",
+    "xss": "^1.0.8"
+  },
+  "globals": {
+    "supertest": true,
+    "expect": true
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "nodemon": "^2.0.7",
+    "supertest": "^6.0.1"
+  }
+}
